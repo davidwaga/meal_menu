@@ -4,7 +4,11 @@ class MealPlan < ApplicationRecord
   validates :end_date, presence: true
   validates :user, presence: true
 
-#building meals with recipes
+  accepts_nested_attributes_for :meals
+  #has_many :meals, -> { order(:date) }, inverse_of: :meal_plan
+  has_many :meals, -> { order(:date) }, inverse_of: :meal_plan, dependent: :destroy
+
+  #building meals with recipes
   def build_meals
     user_recipe_ids = user.recipes.pluck(:id)
 
@@ -14,6 +18,14 @@ class MealPlan < ApplicationRecord
       available_recipes = unused_recipes.empty? ? user_recipe_ids : unused_recipes
       meals.build(date: date, recipe_id: available_recipes.sample)
     end
+  end
+
+  def to_s
+    "#{start_date} - #{end_date}"
+  end
+
+  def to_s
+    "#{I18n.localize(start_date)} - #{I18n.localize(end_date)}"
   end
 
 end

@@ -5,4 +5,7 @@ class Meal < ApplicationRecord
     validates :date, presence: true
     validates :meal_plan, presence: true
     validates :recipe, presence: true
+
+
+    belongs_to :meal, inverse_of: :meals
 end

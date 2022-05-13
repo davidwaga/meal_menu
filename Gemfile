@@ -29,6 +29,7 @@ gem "jbuilder"
 gem 'nokogiri', '1.8.5'
 gem 'clearance', '~> 1.15.1'
 gem 'faker'
+gem 'bootstrap-sass'
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
